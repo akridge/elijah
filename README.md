@@ -3,14 +3,12 @@
 
 A browser-based RSVP (Rapid Serial Visual Presentation) Bible speed reader. One word at a time, centered on the Optimal Recognition Point so your eyes never move — just read.
 
-**[akridge.github.io/elijah-reader](https://akridge.github.io/elijah-reader)**
+**[akridge.github.io/elijah](https://akridge.github.io/elijah)**
 
 ![Elijah reader in action](demo.gif)
 
 ---
-
 ## Features
-
 - **RSVP display** — Spritz-style ORP alignment keeps the focal letter fixed at center screen
 - **KJV Bible** — all 66 books, fetched live from [bible-api.com](https://bible-api.com)
 - **Passage selection** — pick book/chapter/verse/end-verse from dropdowns, or type a reference like `Psalms 119:105-120`
@@ -23,13 +21,11 @@ A browser-based RSVP (Rapid Serial Visual Presentation) Bible speed reader. One 
 - **Mobile friendly** — bottom sheets for passage picker and settings on small screens
 
 ## Keyboard Shortcuts
-
 | Key | Action |
 |-----|--------|
 | `Space` | Play / Pause |
 | `←` `→` | Step back / forward one word |
 | `↑` `↓` | Speed +50 / −50 WPM |
-
 
 ## How It Works
 
