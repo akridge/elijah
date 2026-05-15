@@ -171,7 +171,8 @@
             80%      { transform: translateX(4px); }
         }
 
-        #searchInput.error {
+        #searchInput.error,
+        .sheet-input.error {
             border-color: #ef4444;
             animation: shake 0.35s ease;
         }
@@ -880,6 +881,10 @@
             gap: 10px;
             width: 100%;
         }
+        /* two-ID rule beats the single-ID hide rule on mobile */
+        #sheetControlsSlot #navControls {
+            display: flex !important;
+        }
         .sheet-controls .nav-controls select { width: 100%; }
         .sheet-controls .nav-label { font-size: 11px; margin-top: 4px; }
 
@@ -1068,7 +1073,7 @@
     <!-- nav controls slot: navControls div is moved here on mobile -->
     <div class="sheet-controls" id="sheetControlsSlot"></div>
     <div class="sheet-apply-row">
-        <button class="btn-apply" onclick="closePassageSheet()">Done</button>
+        <button class="btn-apply" onclick="applySheetSelection()">Go</button>
     </div>
 </div>
 
@@ -1925,10 +1930,40 @@ function closePassageSheet() {
 }
 
 function doSheetSearch() {
-    const val = document.getElementById('mobileSearchInput').value;
-    document.getElementById('searchInput').value = val;
-    doSearch();
+    const mobileInput = document.getElementById('mobileSearchInput');
+    const val = mobileInput.value.trim();
+    if (!val) return;
+
+    const ref = parseReference(val);
+    if (!ref) {
+        mobileInput.classList.remove('error');
+        void mobileInput.offsetWidth;
+        mobileInput.classList.add('error');
+        setTimeout(() => mobileInput.classList.remove('error'), 600);
+        return;
+    }
+
+    selBook     = ref.bookIdx;
+    selChapter  = ref.chapter;
+    selVerse    = ref.startVerse;
+    selEndVerse = ref.endVerse;
+
+    syncSelects();
+    resetReader();
     closePassageSheet();
+    setTimeout(() => play(), 50);
+}
+
+function applySheetSelection() {
+    const searchVal = document.getElementById('mobileSearchInput').value.trim();
+    if (searchVal) {
+        doSheetSearch();
+        return;
+    }
+    // Manual dropdown path — sel* already updated by onchange handlers
+    resetReader();
+    closePassageSheet();
+    setTimeout(() => play(), 50);
 }
 
 // ── Settings sheet ──
