@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Elijah — Bible Speed Reader</title>
     <style>
         :root {
@@ -889,7 +889,7 @@
         .sheet-controls .nav-label { font-size: 11px; margin-top: 4px; }
 
         .sheet-apply-row {
-            padding: 12px 16px;
+            padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
             flex-shrink: 0;
             border-top: 1px solid var(--border);
         }
@@ -937,7 +937,7 @@
             .verse-ref { font-size: 10px; letter-spacing: 1.5px; }
 
             /* Footer restructure */
-            footer { flex-direction: column; padding: 10px 14px 14px; gap: 8px; }
+            footer { flex-direction: column; padding: 10px 14px calc(14px + env(safe-area-inset-bottom, 0px)); gap: 8px; }
             .footer-row { display: flex; align-items: center; justify-content: center; width: 100%; gap: 8px; }
             #footerPlay .btn { flex: 1; justify-content: center; padding: 12px 8px; font-size: 14px; }
             #footerPlay .btn-play { flex: 2; font-size: 16px; }
