@@ -3,7 +3,7 @@
 
 A browser-based RSVP (Rapid Serial Visual Presentation) Bible speed reader. One word at a time, centered on the Optimal Recognition Point so your eyes never move — just read.
 
-**[yourusername.github.io/elijah-reader](https://akridge.github.io/elijah-reader)**
+**[akridge.github.io/elijah-reader](https://akridge.github.io/elijah-reader)**
 
 ![Elijah reader in action](demo.gif)
 
