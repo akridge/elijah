@@ -7,7 +7,6 @@ A browser-based RSVP (Rapid Serial Visual Presentation) Bible speed reader. One 
 
 ![Elijah reader in action](demo.gif)
 
----
 ## Features
 - **RSVP display** — Spritz-style ORP alignment keeps the focal letter fixed at center screen
 - **KJV Bible** — all 66 books, fetched live from [bible-api.com](https://bible-api.com)
