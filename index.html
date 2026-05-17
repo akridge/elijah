@@ -20,6 +20,21 @@
             --border: #252535;
             --reading-font: 'Spectral', Georgia, serif;
             --reading-style: italic;
+            --surface-top: #1a1a2a;
+            --card-inner: #1e1830;
+            --footer-bottom: #131320;
+        }
+
+        html.light {
+            --bg: #f5f5f7;
+            --surface: #ffffff;
+            --surface2: #f1f5f9;
+            --text: #1e293b;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --surface-top: #eef2f9;
+            --card-inner: #ede9f8;
+            --footer-bottom: #eef2f9;
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -50,7 +65,7 @@
 
         /* ── HEADER ── */
         header {
-            background: linear-gradient(180deg, #1a1a2a 0%, var(--surface) 100%);
+            background: linear-gradient(180deg, var(--surface-top) 0%, var(--surface) 100%);
             border-bottom: 1px solid var(--border);
             box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 12%, transparent);
             padding: 10px 20px;
@@ -241,7 +256,7 @@
 
         /* ── RSVP CARD ── */
         .rsvp-card {
-            background: radial-gradient(ellipse 80% 60% at 50% 50%, #1e1830 0%, var(--surface) 100%);
+            background: radial-gradient(ellipse 80% 60% at 50% 50%, var(--card-inner) 0%, var(--surface) 100%);
             border: 1px solid var(--border);
             border-radius: 20px;
             width: 100%;
@@ -468,7 +483,7 @@
 
         /* ── FOOTER ── */
         footer {
-            background: linear-gradient(0deg, #131320 0%, var(--surface) 100%);
+            background: linear-gradient(0deg, var(--footer-bottom) 0%, var(--surface) 100%);
             border-top: 1px solid var(--border);
             box-shadow: 0 -1px 0 color-mix(in srgb, var(--accent) 8%, transparent);
             padding: 12px 24px;
@@ -670,7 +685,7 @@
             top: 0; right: 0; bottom: 0;
             width: 340px;
             max-width: 92vw;
-            background: linear-gradient(180deg, #1a1a2a 0%, var(--surface) 80px);
+            background: linear-gradient(180deg, var(--surface-top) 0%, var(--surface) 80px);
             border-left: 1px solid var(--border);
             z-index: 100;
             display: flex;
@@ -868,7 +883,7 @@
         .bottom-sheet {
             position: fixed;
             left: 0; right: 0; bottom: 0;
-            background: linear-gradient(180deg, #1a1a2a 0%, var(--surface) 60px);
+            background: linear-gradient(180deg, var(--surface-top) 0%, var(--surface) 60px);
             border-top: 1px solid color-mix(in srgb, var(--accent) 30%, var(--border));
             border-radius: 22px 22px 0 0;
             z-index: 120;
@@ -1250,6 +1265,10 @@
             <span class="sheet-setting-label">View</span>
             <button class="btn" id="modeBtn2" onclick="toggleVersePanel()" style="padding:6px 14px;font-size:13px">📖 Follow</button>
         </div>
+        <div class="sheet-setting-row">
+            <span class="sheet-setting-label">Appearance</span>
+            <button class="btn btn-light-toggle" onclick="toggleLightMode()" style="padding:6px 14px;font-size:13px">🌙 Dark</button>
+        </div>
     </div>
 </div>
 
@@ -1330,6 +1349,10 @@
         <div class="footer-divider"></div>
 
         <button class="btn" id="modeBtn" onclick="toggleVersePanel()">📖 Follow</button>
+
+        <div class="footer-divider"></div>
+
+        <button class="btn btn-light-toggle" onclick="toggleLightMode()" title="Toggle light/dark mode">🌙 Dark</button>
 
         <span class="kb-hint">
             <kbd>Space</kbd> play/pause &nbsp;
@@ -1620,6 +1643,20 @@ function setColorMode(mode) {
     // re-render current word so the change is visible immediately
     if (words.length) renderWord(words[curIdx]);
 }
+
+/* ── Light mode ── */
+let lightMode = localStorage.getItem('elijahLight') === '1';
+
+function applyLightMode(on) {
+    lightMode = on;
+    document.documentElement.classList.toggle('light', on);
+    localStorage.setItem('elijahLight', on ? '1' : '0');
+    document.querySelectorAll('.btn-light-toggle').forEach(btn => {
+        btn.textContent = on ? '☀ Light' : '🌙 Dark';
+    });
+}
+
+function toggleLightMode() { applyLightMode(!lightMode); }
 
 /* ── Font switching ── */
 function applyFont(font) {
@@ -2256,6 +2293,7 @@ updateMobileRef();
 document.getElementById('verseDisplay').classList.add('panel-hidden');
 document.querySelector('main').classList.add('focus-mode');
 syncModeBtns();
+applyLightMode(lightMode);
 </script>
 
 </body>
